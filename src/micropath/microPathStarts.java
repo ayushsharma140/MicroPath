@@ -15,6 +15,7 @@ public class microPathStarts extends javax.swing.JFrame {
      */
     public microPathStarts() {
         initComponents();
+    
     }
 
     /**

@@ -4,6 +4,13 @@
  * and open the template in the editor.
  */
 package micropath;
+
+import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.PreparedStatement;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ArinjayaKhare1
@@ -17,7 +24,61 @@ public class microPathStarts extends javax.swing.JFrame {
         initComponents();
     
     }
-
+   private boolean validate_login(String username,String password) {
+   try{           
+       Class.forName("com.mysql.jdbc.Driver");  // MySQL database connection
+       java.sql.Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demo?" + "user=root&password=root");     
+       java.sql.PreparedStatement pst = conn.prepareStatement("Select * from login_data where username=? and password=?");
+       pst.setString(1, username); 
+       pst.setString(2, password);
+       ResultSet rs = pst.executeQuery();                        
+       if(rs.next())            
+           return true;    
+       else
+           return false;            
+   }
+   catch(Exception e){
+       e.printStackTrace();
+       return false;
+   }       
+}
+   private boolean validate_login(String username,String password,int laccess,int caccess) {
+   try{           
+       ResultSet rs;
+       Class.forName("com.mysql.jdbc.Driver");  // MySQL database connection
+       java.sql.Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demo?" + "user=root&password=root");   
+       if(laccess==1)
+       {
+           java.sql.PreparedStatement pst = conn.prepareStatement("Select * from login_data where username=? and password=? and laccess=? ");
+           pst.setString(1, username); 
+           pst.setString(2, password);
+           pst.setInt(3, laccess);
+           rs = pst.executeQuery();
+       } 
+       else 
+       {
+           java.sql.PreparedStatement pst = conn.prepareStatement("Select * from login_data where username=? and password=? and caccess=?");
+           pst.setString(1, username); 
+           pst.setString(2, password);
+           pst.setInt(3,caccess);
+           rs = pst.executeQuery();
+       }
+       /*
+       java.sql.PreparedStatement pst = conn.prepareStatement("Select * from login_data where username=? and password=? ");
+       pst.setString(1, username); 
+       pst.setString(2, password);
+       ResultSet rs = pst.executeQuery();                        
+       */
+       if(rs.next())
+           return true;    
+       else
+           return false;            
+   }
+   catch(Exception e){
+       e.printStackTrace();
+       return false;
+   }       
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -166,10 +227,65 @@ public class microPathStarts extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String userGet,passGet;
-        userGet=userGrab.getText();
-        passGet=passGrab.getText();
-        String selectedUser=(String)userTypeGrab.getSelectedItem();
+   if(userGrab.getText().length()==0||passGrab.getPassword().length==0)  // Checking for empty field
+   {
+       JOptionPane.showMessageDialog(null, "Empty fields detected ! Please fill up all fields");
+   }    
+   else
+   {
+       String userGet,passGet;
+       userGet=userGrab.getText();
+       char[] pass = passGrab.getPassword(); // Collecting the input
+       passGet = String.copyValueOf(pass);  // converting from array to string
+       String selectedUser=(String)userTypeGrab.getSelectedItem();
+       int locoAccess=0,controlAccess=0;
+       if(selectedUser.equals("Loco Pilot"))
+       {
+           locoAccess=1;
+       }
+       else
+       {
+           controlAccess=1;
+       }
+       if(!validate_login(userGet,passGet))
+       {
+           JOptionPane.showMessageDialog(null, "Incorrect Username or Password");
+       }
+       else if(!validate_login(userGet,passGet,locoAccess,controlAccess)&&validate_login(userGet,passGet))
+       {
+           if(locoAccess==1)
+           {
+               JOptionPane.showMessageDialog(null, "You dont have Loco Pilot Access");
+           }
+           else
+           {
+               JOptionPane.showMessageDialog(null, "You dont have Control Room Operator Access");
+           }
+       }
+       else if(validate_login(userGet,passGet,locoAccess,controlAccess)&&validate_login(userGet,passGet))
+       {
+           //JOptionPane.showMessageDialog(null, "Correct Login Credentials"); 
+           if(locoAccess==1)
+           {
+                LocoPilotGUI lpg=new LocoPilotGUI(userGet);
+                this.setVisible(false);
+                lpg.setVisible(true);
+           }
+           else
+           {
+                ControlRoomGUI crg=new ControlRoomGUI(userGet);
+                this.setVisible(false);
+                crg.setVisible(true);
+           }
+       }
+                 
+       else
+       {
+           JOptionPane.showMessageDialog(null, "Incorrect Login Credentials");
+       }
+          
+   }        
+        /*
         if(userGet.equals("Arinjaya")&&passGet.equals("12345"))
         {
             if(selectedUser.equals("Loco Pilot"))
@@ -223,6 +339,7 @@ public class microPathStarts extends javax.swing.JFrame {
             invalidDisplay.setVisible(true);
             
         }     
+        */
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

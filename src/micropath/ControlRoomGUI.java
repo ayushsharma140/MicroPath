@@ -204,7 +204,9 @@ public class ControlRoomGUI extends javax.swing.JFrame {
             PreparedStatement ps = conn.prepareStatement("UPDATE `demo`.`train_data_control_room` SET `signal`='0' WHERE `signal`='1' ");
             ps.executeUpdate();
             ps.close();
-            
+            ControlRoomGUI crg=new ControlRoomGUI(name);
+            this.setVisible(false);
+            crg.setVisible(true);
             
         }
         catch(Exception e){

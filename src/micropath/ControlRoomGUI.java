@@ -70,6 +70,8 @@ public class ControlRoomGUI extends javax.swing.JFrame {
         AddTrain = new javax.swing.JButton();
         Emergency = new javax.swing.JButton();
         TrainTable = new javax.swing.JTextField();
+        updateSignalButton = new javax.swing.JButton();
+        removeTrainButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Control Room Display");
@@ -104,7 +106,9 @@ public class ControlRoomGUI extends javax.swing.JFrame {
 
         Emergency.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         Emergency.setForeground(new java.awt.Color(255, 0, 0));
-        Emergency.setText("EMERGENCY STOP");
+        Emergency.setText("Emergency Stop");
+        Emergency.setMaximumSize(new java.awt.Dimension(127, 25));
+        Emergency.setMinimumSize(new java.awt.Dimension(127, 25));
         Emergency.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 EmergencyActionPerformed(evt);
@@ -118,27 +122,45 @@ public class ControlRoomGUI extends javax.swing.JFrame {
             }
         });
 
+        updateSignalButton.setText("Update Signal");
+        updateSignalButton.setMaximumSize(new java.awt.Dimension(127, 25));
+        updateSignalButton.setMinimumSize(new java.awt.Dimension(127, 25));
+        updateSignalButton.setPreferredSize(new java.awt.Dimension(127, 25));
+        updateSignalButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateSignalButtonActionPerformed(evt);
+            }
+        });
+
+        removeTrainButton.setText("Remove Train ");
+        removeTrainButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeTrainButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ControlRoomName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(ControlRoomName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
+                        .addGap(6, 6, 6)
                         .addComponent(AddTrain, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(46, 46, 46)
+                        .addGap(18, 18, 18)
+                        .addComponent(updateSignalButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(removeTrainButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(Emergency, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 272, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                         .addComponent(LogoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(ExitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(TrainTable)))
+                    .addComponent(TrainTable))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -153,7 +175,9 @@ public class ControlRoomGUI extends javax.swing.JFrame {
                     .addComponent(ExitButton)
                     .addComponent(LogoutButton)
                     .addComponent(AddTrain, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Emergency, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Emergency, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(updateSignalButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(removeTrainButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -220,6 +244,21 @@ public class ControlRoomGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TrainTableActionPerformed
 
+    private void updateSignalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateSignalButtonActionPerformed
+        // TODO add your handling code here:
+        AddTrains addt=new AddTrains(name,1);
+        this.setVisible(false);
+        addt.setVisible(true);
+        
+    }//GEN-LAST:event_updateSignalButtonActionPerformed
+
+    private void removeTrainButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeTrainButtonActionPerformed
+        // TODO add your handling code here:
+        DeleteTrains del=new DeleteTrains(name);
+        this.setVisible(false);
+        del.setVisible(true);
+    }//GEN-LAST:event_removeTrainButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -263,5 +302,7 @@ public class ControlRoomGUI extends javax.swing.JFrame {
     private javax.swing.JButton LogoutButton;
     private javax.swing.JTextField TrainTable;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton removeTrainButton;
+    private javax.swing.JButton updateSignalButton;
     // End of variables declaration//GEN-END:variables
 }

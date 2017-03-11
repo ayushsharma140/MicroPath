@@ -144,8 +144,10 @@
         <Component class="javax.swing.JTextField" name="TrainTable">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
-            <Property name="text" type="java.lang.String" value="All Normal Train Data to be added Later"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TrainTableActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

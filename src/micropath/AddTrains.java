@@ -5,6 +5,13 @@
  */
 package micropath;
 
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author ArinjayaKhare1
@@ -36,7 +43,7 @@ public class AddTrains extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         TrainNumber = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        TrainSignal = new javax.swing.JTextField();
         ExitButton = new javax.swing.JButton();
         AddTrainButton = new javax.swing.JButton();
         BackButton = new javax.swing.JButton();
@@ -84,7 +91,7 @@ public class AddTrains extends javax.swing.JFrame {
                 .addComponent(ExitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(90, Short.MAX_VALUE)
+                .addContainerGap(107, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -93,7 +100,7 @@ public class AddTrains extends javax.swing.JFrame {
                         .addGap(42, 42, 42)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(TrainNumber)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE))
+                            .addComponent(TrainSignal, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE))
                         .addGap(167, 167, 167))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(AddTrainButton, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -109,7 +116,7 @@ public class AddTrains extends javax.swing.JFrame {
                 .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TrainSignal, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(88, 88, 88)
                 .addComponent(AddTrainButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 191, Short.MAX_VALUE)
@@ -148,10 +155,33 @@ public class AddTrains extends javax.swing.JFrame {
     }//GEN-LAST:event_BackButtonActionPerformed
 
     private void AddTrainButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddTrainButtonActionPerformed
-        // TODO add your handling code here:
+        try
+        {
+            String new_train_number,new_train_signal;
+            new_train_number=TrainNumber.getText();
+            new_train_signal=TrainSignal.getText();
+            ResultSet rs;
+            Class.forName("com.mysql.jdbc.Driver");  // MySQL database connection
+            java.sql.Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demo?" + "user=root&password=root");
+            String SQL = "INSERT INTO train_data_control_room VALUES (?, ?)";
+            PreparedStatement pstmt = conn.prepareStatement(SQL);
+
+            pstmt.setString(1, new_train_number);
+            pstmt.setString(2, new_train_signal);
+
+            pstmt.executeUpdate();
+            pstmt.close();
+            
+            
+        }
+        catch(Exception e){
+       e.printStackTrace();
+       
+        }  
+        
         ControlRoomGUI crg=new ControlRoomGUI(name);
-        this.setVisible(false);
-        crg.setVisible(true);
+            this.setVisible(false);
+            crg.setVisible(true);
     }//GEN-LAST:event_AddTrainButtonActionPerformed
 
     /**
@@ -194,9 +224,9 @@ public class AddTrains extends javax.swing.JFrame {
     private javax.swing.JButton BackButton;
     private javax.swing.JButton ExitButton;
     private javax.swing.JTextField TrainNumber;
+    private javax.swing.JTextField TrainSignal;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

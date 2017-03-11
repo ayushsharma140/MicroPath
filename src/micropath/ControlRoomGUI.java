@@ -5,6 +5,10 @@
  */
 package micropath;
 
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 /**
  *
  * @author ArinjayaKhare1
@@ -22,6 +26,30 @@ public class ControlRoomGUI extends javax.swing.JFrame {
         this();
         name=x;
         ControlRoomName.setText("Welcome "+x);
+        String trainNo="",Signals="";
+        try
+        {
+            ResultSet rs;
+            Class.forName("com.mysql.jdbc.Driver");  // MySQL database connection
+            java.sql.Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demo?" + "user=root&password=root");
+            java.sql.PreparedStatement pst = conn.prepareStatement("Select * from train_data_control_room ");
+            rs=pst.executeQuery();
+            while(rs.next())
+            {
+                String r,q;
+                r=rs.getString("train_no");
+                q=rs.getString("signal");
+                trainNo=trainNo+r+ " " + q+ "\n";
+                
+                
+            }
+            
+        }
+        catch(Exception e){
+       e.printStackTrace();
+       
+        }  
+        TrainTable.setText(trainNo);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -83,7 +111,11 @@ public class ControlRoomGUI extends javax.swing.JFrame {
         });
 
         TrainTable.setEditable(false);
-        TrainTable.setText("All Normal Train Data to be added Later");
+        TrainTable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TrainTableActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -162,6 +194,10 @@ public class ControlRoomGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         TrainTable.setText("All Signals red Now");
     }//GEN-LAST:event_EmergencyActionPerformed
+
+    private void TrainTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrainTableActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TrainTableActionPerformed
 
     /**
      * @param args the command line arguments

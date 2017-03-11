@@ -6,6 +6,7 @@
 package micropath;
 
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
@@ -192,7 +193,25 @@ public class ControlRoomGUI extends javax.swing.JFrame {
 
     private void EmergencyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmergencyActionPerformed
         // TODO add your handling code here:
-        TrainTable.setText("All Signals red Now");
+        //TrainTable.setText("All Signals red Now");
+        try
+        {
+            String new_train_number,new_train_signal;
+            
+            ResultSet rs;
+            Class.forName("com.mysql.jdbc.Driver");  // MySQL database connection
+            java.sql.Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demo?" + "user=root&password=root");
+            PreparedStatement ps = conn.prepareStatement("UPDATE `demo`.`train_data_control_room` SET `signal`='0' WHERE `signal`='1' ");
+            ps.executeUpdate();
+            ps.close();
+            
+            
+        }
+        catch(Exception e){
+       e.printStackTrace();
+       
+        }  
+        
     }//GEN-LAST:event_EmergencyActionPerformed
 
     private void TrainTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrainTableActionPerformed

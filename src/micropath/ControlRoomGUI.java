@@ -5,6 +5,7 @@
  */
 package micropath;
 
+import java.awt.Color;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -37,10 +38,19 @@ public class ControlRoomGUI extends javax.swing.JFrame {
             rs=pst.executeQuery();
             while(rs.next())
             {
-                String r,q;
+                String r,q,s;
                 r=rs.getString("train_no");
                 q=rs.getString("signal");
-                trainNo=trainNo+r+ " " + q+ "\n";
+                if(q.compareTo("0")==0)
+                {
+                    s="RED";
+                    
+                }
+                else
+                {
+                    s="GREEN";
+                }
+                trainNo=trainNo+r+ "                                 " + s+ "\n";
                 
                 
             }
@@ -51,6 +61,7 @@ public class ControlRoomGUI extends javax.swing.JFrame {
        
         }  
         TrainTable.setText(trainNo);
+        TrainTable.setForeground(Color.RED);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -69,9 +80,10 @@ public class ControlRoomGUI extends javax.swing.JFrame {
         LogoutButton = new javax.swing.JButton();
         AddTrain = new javax.swing.JButton();
         Emergency = new javax.swing.JButton();
-        TrainTable = new javax.swing.JTextField();
         updateSignalButton = new javax.swing.JButton();
         removeTrainButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TrainTable = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Control Room Display");
@@ -115,13 +127,6 @@ public class ControlRoomGUI extends javax.swing.JFrame {
             }
         });
 
-        TrainTable.setEditable(false);
-        TrainTable.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TrainTableActionPerformed(evt);
-            }
-        });
-
         updateSignalButton.setText("Update Signal");
         updateSignalButton.setMaximumSize(new java.awt.Dimension(127, 25));
         updateSignalButton.setMinimumSize(new java.awt.Dimension(127, 25));
@@ -138,6 +143,9 @@ public class ControlRoomGUI extends javax.swing.JFrame {
                 removeTrainButtonActionPerformed(evt);
             }
         });
+
+        TrainTable.setEditable(false);
+        jScrollPane1.setViewportView(TrainTable);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -159,9 +167,12 @@ public class ControlRoomGUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                         .addComponent(LogoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(ExitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(TrainTable))
+                        .addComponent(ExitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 890, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,8 +180,8 @@ public class ControlRoomGUI extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addComponent(ControlRoomName, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TrainTable, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
-                .addGap(46, 46, 46)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ExitButton)
                     .addComponent(LogoutButton)
@@ -240,10 +251,6 @@ public class ControlRoomGUI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_EmergencyActionPerformed
 
-    private void TrainTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TrainTableActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TrainTableActionPerformed
-
     private void updateSignalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateSignalButtonActionPerformed
         // TODO add your handling code here:
         AddTrains addt=new AddTrains(name,1);
@@ -300,8 +307,9 @@ public class ControlRoomGUI extends javax.swing.JFrame {
     private javax.swing.JButton Emergency;
     private javax.swing.JButton ExitButton;
     private javax.swing.JButton LogoutButton;
-    private javax.swing.JTextField TrainTable;
+    private javax.swing.JTextPane TrainTable;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton removeTrainButton;
     private javax.swing.JButton updateSignalButton;
     // End of variables declaration//GEN-END:variables

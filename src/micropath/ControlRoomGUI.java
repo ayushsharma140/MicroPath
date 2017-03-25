@@ -5,11 +5,15 @@
  */
 package micropath;
 
-import java.awt.Color;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
+import javax.swing.JList;
+import javax.swing.JScrollPane;
 
 /**
  *
@@ -20,6 +24,7 @@ public class ControlRoomGUI extends javax.swing.JFrame {
     /**
      * Creates new form ControlRoomGUI
      */
+    DefaultListModel<CustomTrainArrayList> trainList= new DefaultListModel<CustomTrainArrayList>();
     String name;
     public ControlRoomGUI() {
         initComponents();
@@ -44,15 +49,19 @@ public class ControlRoomGUI extends javax.swing.JFrame {
                 if(q.compareTo("0")==0)
                 {
                     s="RED";
-                    
                 }
                 else
                 {
                     s="GREEN";
                 }
-                trainNo=trainNo+r+ "                                 " + s+ "\n";
-                
-                
+                trainNo=trainNo+r+ "                                                                                                           " + s+ "\n";
+                trainList.addElement(new CustomTrainArrayList(r,s));
+                /*
+                //Just to see if data is fine
+                System.out.println(trainList.size());
+                CustomTrainArrayList cst=trainList.get(trainList.size()-1);
+                System.out.println("Data::"+cst.getSignal()+" "+cst.getTrainNo());
+                */
             }
             
         }
@@ -60,8 +69,14 @@ public class ControlRoomGUI extends javax.swing.JFrame {
        e.printStackTrace();
        
         }  
+        JList<CustomTrainArrayList> TrainTableData = new JList<CustomTrainArrayList>(trainList);
         TrainTable.setText(trainNo);
-        TrainTable.setForeground(Color.RED);
+        /*this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setTitle("JList Renderer Example");
+        this.setSize(200, 200);
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+        */
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -83,7 +98,7 @@ public class ControlRoomGUI extends javax.swing.JFrame {
         updateSignalButton = new javax.swing.JButton();
         removeTrainButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TrainTable = new javax.swing.JTextPane();
+        TrainTable = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Control Room Display");
@@ -144,7 +159,8 @@ public class ControlRoomGUI extends javax.swing.JFrame {
             }
         });
 
-        TrainTable.setEditable(false);
+        TrainTable.setColumns(20);
+        TrainTable.setRows(5);
         jScrollPane1.setViewportView(TrainTable);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -307,7 +323,7 @@ public class ControlRoomGUI extends javax.swing.JFrame {
     private javax.swing.JButton Emergency;
     private javax.swing.JButton ExitButton;
     private javax.swing.JButton LogoutButton;
-    private javax.swing.JTextPane TrainTable;
+    private javax.swing.JTextArea TrainTable;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton removeTrainButton;

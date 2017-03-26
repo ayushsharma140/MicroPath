@@ -72,7 +72,7 @@ public class ControlRoomGUI extends javax.swing.JFrame {
         JList<CustomTrainArrayList> TrainTableData = new JList<CustomTrainArrayList>(trainList);
         
        jScrollPane1.setViewportView(TrainTableData);
-       TrainTableData.setCellRenderer(new TrainDataRenderer());
+       TrainTableData.setCellRenderer(new TrainDataRenderer(name));
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -151,6 +151,12 @@ public class ControlRoomGUI extends javax.swing.JFrame {
         removeTrainButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 removeTrainButtonActionPerformed(evt);
+            }
+        });
+
+        jScrollPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jScrollPane1MouseClicked(evt);
             }
         });
 
@@ -270,9 +276,12 @@ public class ControlRoomGUI extends javax.swing.JFrame {
 
     private void updateSignalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateSignalButtonActionPerformed
         // TODO add your handling code here:
-        AddTrains addt=new AddTrains(name,1);
+        ControlRoomGUI controlrg=new ControlRoomGUI(name);
+                this.setVisible(false);
+                controlrg.setVisible(true);
+        /*AddTrains addt=new AddTrains(name,1);
         this.setVisible(false);
-        addt.setVisible(true);
+        addt.setVisible(true);*/
         
     }//GEN-LAST:event_updateSignalButtonActionPerformed
 
@@ -282,6 +291,10 @@ public class ControlRoomGUI extends javax.swing.JFrame {
         this.setVisible(false);
         del.setVisible(true);
     }//GEN-LAST:event_removeTrainButtonActionPerformed
+
+    private void jScrollPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jScrollPane1MouseClicked
 
     /**
      * @param args the command line arguments

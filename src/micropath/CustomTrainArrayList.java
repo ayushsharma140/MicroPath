@@ -30,5 +30,8 @@ public String getSignal()
 {
     return Signal;
 }
-
+@Override
+public String toString() {
+    return TrainNo;
+}
 }

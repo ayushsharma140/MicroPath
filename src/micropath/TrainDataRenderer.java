@@ -64,9 +64,9 @@ public class TrainDataRenderer extends JLabel implements ListCellRenderer<Custom
             y.setBackground(Color.GREEN);
         }
         if (isSelected) {
-          clicked=1;  
+          clicked++;  
           renderer.setBackground(backgroundSelectionColor);
-          System.out.println(this.x.getText()+this.y.getText());
+          System.out.println(this.x.getText()+this.y.getText()+"     "+clicked);
           if(this.y.getBackground()==Color.RED)
           {
               this.y.setText("                                                   "+green);
@@ -119,7 +119,7 @@ public class TrainDataRenderer extends JLabel implements ListCellRenderer<Custom
         
         
         else {
-          if(clicked==1)
+          if(clicked>0)
           {
               try
               {
@@ -142,7 +142,7 @@ public class TrainDataRenderer extends JLabel implements ListCellRenderer<Custom
                 pstmt.setString(2, this.x.getText());
                 pstmt.executeUpdate();
                 pstmt.close();
-                clicked=0;
+                clicked--;
                 
               }
                catch(Exception e){

@@ -52,7 +52,7 @@
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="90" max="32767" attributes="0"/>
+                  <EmptySpace pref="107" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -62,7 +62,7 @@
                           <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="TrainNumber" max="32767" attributes="0"/>
-                              <Component id="jTextField1" pref="283" max="32767" attributes="0"/>
+                              <Component id="TrainSignal" pref="283" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="167" max="-2" attributes="0"/>
                       </Group>
@@ -85,7 +85,7 @@
                   <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel2" alignment="3" min="-2" pref="46" max="-2" attributes="0"/>
-                      <Component id="jTextField1" alignment="3" min="-2" pref="46" max="-2" attributes="0"/>
+                      <Component id="TrainSignal" alignment="3" min="-2" pref="46" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
                   <Component id="AddTrainButton" min="-2" max="-2" attributes="0"/>
@@ -118,7 +118,7 @@
             <Property name="text" type="java.lang.String" value="Enter Signal(1 for Green 0 for Red):"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField1">
+        <Component class="javax.swing.JTextField" name="TrainSignal">
         </Component>
         <Component class="javax.swing.JButton" name="ExitButton">
           <Properties>

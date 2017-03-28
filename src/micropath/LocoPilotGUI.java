@@ -45,6 +45,7 @@ public class LocoPilotGUI extends javax.swing.JFrame {
         setTitle("Loco Pilot Display");
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel1.setToolTipText("");
 
         DriverName.setBackground(new java.awt.Color(0, 153, 153));
         DriverName.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N

@@ -17,22 +17,18 @@ import javax.swing.JOptionPane;
  *
  * @author ArinjayaKhare1
  */
-public class AddTrains extends javax.swing.JFrame {
+public class DeleteTrains extends javax.swing.JFrame {
 
     /**
      * Creates new form AddTrains
      */
     String name;
-    int choice=0;
-    public AddTrains() {
+    
+    public DeleteTrains() {
         initComponents();
     }
-    public AddTrains(String s,int x) {
-        this();
-        name=s;
-        choice=x;
-    }
-    public AddTrains(String s) {
+    
+    public DeleteTrains(String s) {
         this();
         name=s;
         
@@ -49,10 +45,8 @@ public class AddTrains extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         TrainNumber = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        TrainSignal = new javax.swing.JTextField();
         ExitButton = new javax.swing.JButton();
-        AddTrainButton = new javax.swing.JButton();
+        removeTrainButton = new javax.swing.JButton();
         BackButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -63,9 +57,6 @@ public class AddTrains extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Enter Train Number:");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel2.setText("Enter Signal(1 for Green 0 for Red):");
-
         ExitButton.setText("Exit");
         ExitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,10 +64,10 @@ public class AddTrains extends javax.swing.JFrame {
             }
         });
 
-        AddTrainButton.setText("Add Train");
-        AddTrainButton.addActionListener(new java.awt.event.ActionListener() {
+        removeTrainButton.setText("Remove Train");
+        removeTrainButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddTrainButtonActionPerformed(evt);
+                removeTrainButtonActionPerformed(evt);
             }
         });
 
@@ -98,35 +89,27 @@ public class AddTrains extends javax.swing.JFrame {
                 .addComponent(ExitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(107, Short.MAX_VALUE)
+                .addContainerGap(180, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(42, 42, 42)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(TrainNumber)
-                            .addComponent(TrainSignal, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE))
-                        .addGap(167, 167, 167))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(TrainNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(165, 165, 165))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(AddTrainButton, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(386, 386, 386))))
+                        .addComponent(removeTrainButton, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(380, 380, 380))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(107, 107, 107)
+                .addGap(191, 191, 191)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TrainNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TrainSignal, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(88, 88, 88)
-                .addComponent(AddTrainButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 191, Short.MAX_VALUE)
+                    .addComponent(TrainNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(84, 84, 84)
+                .addComponent(removeTrainButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 195, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ExitButton)
                     .addComponent(BackButton))
@@ -169,7 +152,6 @@ public class AddTrains extends javax.swing.JFrame {
        java.sql.Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demo?" + "user=root&password=root");     
        java.sql.PreparedStatement pst = conn.prepareStatement("SELECT * from train_data_control_room WHERE train_no=? ");
        pst.setString(1, new_train_number); 
-      
        ResultSet rs = pst.executeQuery();                        
        if(rs.next())            
            return true;    
@@ -182,73 +164,52 @@ public class AddTrains extends javax.swing.JFrame {
    }       
     }
     
-    private void AddTrainButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddTrainButtonActionPerformed
+    private void removeTrainButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeTrainButtonActionPerformed
         try
         {
             String new_train_number,new_train_signal;
             new_train_number=TrainNumber.getText();
-            new_train_signal=TrainSignal.getText();
-            if(new_train_number.length()==0||new_train_signal.length()==0)
+            
+            if(new_train_number.length()==0)
             {
                 JOptionPane.showMessageDialog(null, "Empty fields detected ! Please fill up all fields");
             }
             else
             {
+                
+            
             ResultSet rs;
             String SQL;
             PreparedStatement pstmt;
             Class.forName("com.mysql.jdbc.Driver");  // MySQL database connection
             java.sql.Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demo?" + "user=root&password=root");
             if(!record_exists(new_train_number))
-            {   if(choice==1)
-                {
-                    JOptionPane.showMessageDialog(null, "Record doesnt Exists");
-                    AddTrains add=new AddTrains(name);
-                    this.setVisible(false);
-                    add.setVisible(true);
-                }
-            else if(choice==0){
-                 SQL = "INSERT INTO train_data_control_room VALUES (?, ?)";
-                 pstmt = conn.prepareStatement(SQL);
-                 pstmt.setString(1, new_train_number);
-                 pstmt.setString(2, new_train_signal);
-                 pstmt.executeUpdate();
-                 pstmt.close();
-                 ControlRoomGUI crg=new ControlRoomGUI(name);
-                 this.setVisible(false);
-                 crg.setVisible(true);
-                }
+            {   
+                JOptionPane.showMessageDialog(null, "Record doesnt Exists");
+                DeleteTrains del=new DeleteTrains(name);
+                this.setVisible(false);
+                del.setVisible(true);                        
             }
             else
             {
-                if(choice==1){
-                SQL="UPDATE `demo`.`train_data_control_room` SET `signal`=? WHERE `train_no`=?";
+                SQL="DELETE FROM `demo`.`train_data_control_room`  WHERE `train_no`=?";
                 pstmt = conn.prepareStatement(SQL);
-                pstmt.setString(1, new_train_signal);
-                pstmt.setString(2, new_train_number);
+                pstmt.setString(1, new_train_number);
                 pstmt.executeUpdate();
                 pstmt.close();
                 ControlRoomGUI crg=new ControlRoomGUI(name);
                 this.setVisible(false);
                 crg.setVisible(true);
-                }
-                else if(choice==0)
-                {
-                    JOptionPane.showMessageDialog(null, "Record alredy exist. Kindly delete it or update it");
-                    AddTrains add=new AddTrains(name);
-                    this.setVisible(false);
-                    add.setVisible(true);
-                }
             }
             }
-         }
+        }
         catch(Exception e){
             e.printStackTrace();
        
         }  
         
         
-    }//GEN-LAST:event_AddTrainButtonActionPerformed
+    }//GEN-LAST:event_removeTrainButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -267,32 +228,31 @@ public class AddTrains extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddTrains.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DeleteTrains.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddTrains.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DeleteTrains.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddTrains.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DeleteTrains.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddTrains.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DeleteTrains.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddTrains().setVisible(true);
+                new DeleteTrains().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AddTrainButton;
     private javax.swing.JButton BackButton;
     private javax.swing.JButton ExitButton;
     private javax.swing.JTextField TrainNumber;
-    private javax.swing.JTextField TrainSignal;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton removeTrainButton;
     // End of variables declaration//GEN-END:variables
 }
